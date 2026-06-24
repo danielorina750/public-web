@@ -220,3 +220,63 @@ async function initPortfolio(){
 }
 
 initPortfolio();
+
+
+// Premium Team section interactions: GSAP scroll orchestration + fallback + luxury hover tracking
+(function initPremiumTeam(){
+  const teamSection = document.querySelector('.premium-team');
+  if (!teamSection) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const animatedItems = [...teamSection.querySelectorAll('[data-team-animate]')];
+
+  if (!reduceMotion && window.gsap) {
+    if (window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+    gsap.set(animatedItems, { autoAlpha: 0, y: 42, filter: 'blur(10px)' });
+    gsap.to(animatedItems, {
+      autoAlpha: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      duration: 1,
+      ease: 'power4.out',
+      stagger: 0.11,
+      scrollTrigger: window.ScrollTrigger ? {
+        trigger: teamSection,
+        start: 'top 72%',
+        once: true
+      } : undefined
+    });
+  } else {
+    const fallbackObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        animatedItems.forEach((el, index) => {
+          el.style.transition = `opacity .8s cubic-bezier(0.16, 1, 0.3, 1) ${index * 70}ms, transform .8s cubic-bezier(0.16, 1, 0.3, 1) ${index * 70}ms, filter .8s cubic-bezier(0.16, 1, 0.3, 1) ${index * 70}ms`;
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+          el.style.filter = 'blur(0)';
+        });
+        fallbackObserver.disconnect();
+      });
+    }, { threshold: 0.18 });
+
+    animatedItems.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(42px)';
+      el.style.filter = 'blur(10px)';
+    });
+    fallbackObserver.observe(teamSection);
+  }
+
+  if (!reduceMotion) {
+    teamSection.querySelectorAll('[data-team-card]').forEach(card => {
+      card.addEventListener('pointermove', event => {
+        const rect = card.getBoundingClientRect();
+        const px = (event.clientX - rect.left) / rect.width;
+        const py = (event.clientY - rect.top) / rect.height;
+        card.style.setProperty('--mx', `${px * 100}%`);
+        card.style.setProperty('--my', `${py * 100}%`);
+      });
+    });
+  }
+})();

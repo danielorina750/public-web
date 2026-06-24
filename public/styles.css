@@ -9,3 +9,34 @@
 /* Live Supabase portfolio sync */
 .portfolio-sync-note{margin:24px 0 0;color:rgba(255,255,255,.58);font-size:13px;letter-spacing:.05em}
 .project-card[data-slug]::after{content:"";position:absolute;inset:0;border-radius:32px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);pointer-events:none}
+
+
+/* Leadership Team Section */
+.team-section{background:linear-gradient(180deg,#f8f6ef 0%,#edf5e4 100%);overflow:hidden}
+.team-shell{display:grid;grid-template-columns:minmax(280px,.82fr) minmax(0,1.18fr);gap:clamp(24px,4vw,44px);align-items:start}
+.team-copy{position:sticky;top:100px}
+.team-copy .lead{color:#4f625a;max-width:560px}
+.team-pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.team-pill-row span{background:#fff;border:1px solid rgba(7,19,15,.08);box-shadow:0 10px 25px rgba(7,19,15,.06);color:#173722;border-radius:999px;padding:10px 14px;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.11em}
+.team-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.team-card{position:relative;display:flex;flex-direction:column;min-height:100%;border-radius:34px;overflow:hidden;background:linear-gradient(180deg,#ffffff 0%,#fbfdf8 100%);border:1px solid rgba(7,19,15,.08);box-shadow:0 24px 70px rgba(8,29,20,.08), inset 0 1px 0 rgba(255,255,255,.8);transform-style:preserve-3d;transition:transform .38s ease, box-shadow .38s ease, border-color .38s ease}
+.team-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(184,255,95,.18),transparent 28%),linear-gradient(180deg,transparent 55%,rgba(87,224,164,.07));pointer-events:none}
+.team-card:hover{transform:translateY(-10px);box-shadow:0 30px 90px rgba(8,29,20,.15);border-color:rgba(91,143,34,.22)}
+.team-visual{position:relative;min-height:360px;display:flex;align-items:flex-end;justify-content:center;padding:20px;background:linear-gradient(160deg,#0d261d 0%,#173a2c 48%,#eff5e6 48%,#eff5e6 100%);overflow:hidden}
+.team-visual img{position:relative;z-index:2;width:min(100%,360px);max-height:390px;object-fit:contain;filter:drop-shadow(0 22px 45px rgba(0,0,0,.18));transform:translateZ(26px);transition:transform .45s ease}
+.team-card:hover .team-visual img{transform:translateY(-6px) translateZ(38px) scale(1.02)}
+.team-visual-glow{position:absolute;inset:auto auto 28px 50%;transform:translateX(-50%);width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(184,255,95,.34),rgba(255,255,255,.1),transparent 68%);z-index:1;filter:blur(6px)}
+.team-card-index{position:absolute;top:18px;right:18px;z-index:3;display:inline-flex;align-items:center;justify-content:center;width:54px;height:54px;border-radius:18px;background:rgba(255,255,255,.86);color:#163924;font-weight:900;letter-spacing:.14em;font-size:12px;box-shadow:0 15px 28px rgba(0,0,0,.12)}
+.team-card-body{position:relative;z-index:2;display:flex;flex-direction:column;gap:0;padding:24px 24px 26px}
+.team-role{margin-bottom:10px;color:#6a8f22;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.18em}
+.team-card-body h3{font-size:30px;line-height:1.02;letter-spacing:-.05em;color:#0d241b;margin:0 0 14px}
+.team-bio{color:#566a61;line-height:1.76;font-size:15px;margin-bottom:22px}
+.team-link{margin-top:auto;display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.14em;color:#173722}
+.team-link span{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#dff5bd;color:#173722;transition:transform .28s ease, background .28s ease}
+.team-card:hover .team-link span{transform:translate(2px,-2px);background:var(--lime)}
+.team-card.placeholder .team-visual{align-items:center;background:linear-gradient(160deg,#123427 0%,#18412f 52%,#f1f7e7 52%,#f1f7e7 100%)}
+.placeholder-visual{justify-content:center}
+.placeholder-avatar{position:relative;z-index:2;width:170px;height:170px;border-radius:42px;background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(223,245,189,.76));border:1px solid rgba(255,255,255,.75);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 30px 60px rgba(0,0,0,.12);display:grid;place-items:center;color:#173722;font-size:42px;font-weight:1000;letter-spacing:.08em}
+.placeholder-avatar::after{content:"Profile";position:absolute;left:50%;bottom:-18px;transform:translateX(-50%);padding:8px 12px;border-radius:999px;background:#071c15;color:#dff5bd;font-size:10px;text-transform:uppercase;letter-spacing:.16em;font-weight:900}
+@media (max-width:1180px){.team-shell{grid-template-columns:1fr}.team-copy{position:relative;top:auto}.team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.team-grid{grid-template-columns:1fr}.team-visual{min-height:320px}.team-card-body h3{font-size:26px}.team-bio{font-size:14px}}

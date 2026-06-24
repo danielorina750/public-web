@@ -8,6 +8,441 @@
   <title>SIEN Group | Premium Architectural Design, Engineering & Infrastructure</title>
   <link rel="icon" type="image/png" href="assets/brand/sien-logo.png" />
   <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* Premium Our Team section: SIEN-branded SaaS/agency-grade cards, GSAP-ready animations */
+    .premium-team {
+      --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(circle at 13% 16%, rgba(184, 255, 95, 0.18), transparent 31%),
+        radial-gradient(circle at 86% 74%, rgba(87, 224, 164, 0.16), transparent 34%),
+        linear-gradient(135deg, #04120e 0%, #071c15 46%, #04110d 100%);
+    }
+
+    .premium-team::before,
+    .premium-team::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      border-radius: 999px;
+      z-index: -1;
+    }
+
+    .premium-team::before {
+      width: 38rem;
+      height: 38rem;
+      right: -14rem;
+      top: -14rem;
+      border: 1px solid rgba(184, 255, 95, 0.22);
+      background: rgba(184, 255, 95, 0.045);
+      animation: premiumTeamOrb 14s var(--ease-premium) infinite alternate;
+    }
+
+    .premium-team::after {
+      width: 28rem;
+      height: 28rem;
+      left: -12rem;
+      bottom: -14rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.025);
+      animation: premiumTeamOrb 16s var(--ease-premium) infinite alternate-reverse;
+    }
+
+    .premium-team-gridline {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      opacity: 0.38;
+      background-image:
+        linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 74px 74px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.8), transparent 88%);
+    }
+
+    .premium-team-shell {
+      width: min(1440px, 92vw);
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .premium-team-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(250px, 420px);
+      align-items: end;
+      gap: clamp(1.75rem, 5vw, 5rem);
+      margin-bottom: clamp(2rem, 5vw, 4.5rem);
+    }
+
+    .premium-team-header h2 {
+      max-width: 980px;
+      margin-bottom: 1rem;
+      letter-spacing: -0.065em;
+    }
+
+    .premium-team-header .lead {
+      max-width: 760px;
+      color: rgba(255,255,255,.72);
+    }
+
+    .premium-team-stat {
+      position: relative;
+      overflow: hidden;
+      min-height: 230px;
+      border-radius: 34px;
+      padding: clamp(1.35rem, 2.4vw, 2rem);
+      background: linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.045));
+      border: 1px solid rgba(255,255,255,.15);
+      box-shadow: 0 34px 90px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.13);
+      backdrop-filter: blur(22px);
+    }
+
+    .premium-team-stat::before {
+      content: "";
+      position: absolute;
+      inset: auto -42px -60px auto;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184,255,95,.24), transparent 68%);
+    }
+
+    .premium-team-stat span {
+      display: block;
+      color: var(--moss);
+      font-size: .76rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .2em;
+      margin-bottom: .75rem;
+    }
+
+    .premium-team-stat strong {
+      display: block;
+      color: #fff;
+      font-size: clamp(4.2rem, 8vw, 7.4rem);
+      line-height: .82;
+      letter-spacing: -.08em;
+    }
+
+    .premium-team-stat p {
+      margin: 1.1rem 0 0;
+      color: rgba(255,255,255,.68);
+      line-height: 1.65;
+      font-size: .96rem;
+    }
+
+    .premium-team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(1rem, 2vw, 1.45rem);
+      align-items: stretch;
+    }
+
+    .premium-member-card {
+      --mx: 50%;
+      --my: 50%;
+      position: relative;
+      min-height: 640px;
+      overflow: hidden;
+      border-radius: 34px;
+      background: linear-gradient(180deg, rgba(255,255,255,.135), rgba(255,255,255,.055));
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 24px 75px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.12);
+      backdrop-filter: blur(18px);
+      transform-style: preserve-3d;
+      transition:
+        transform .65s var(--ease-premium),
+        box-shadow .65s var(--ease-premium),
+        border-color .65s var(--ease-premium),
+        background .65s var(--ease-premium);
+    }
+
+    .premium-member-card::before {
+      display: none;
+    }
+
+    .premium-member-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: rgba(184,255,95,.34);
+      background: linear-gradient(180deg, rgba(255,255,255,.17), rgba(255,255,255,.07));
+      box-shadow: 0 42px 110px rgba(0,0,0,.38), 0 0 0 1px rgba(184,255,95,.08) inset;
+    }
+
+
+
+    .premium-member-photo {
+      position: relative;
+      height: 365px;
+      overflow: hidden;
+      border-radius: 28px;
+      margin: 14px 14px 0;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255,255,255,.8), transparent 29%),
+        linear-gradient(145deg, #ecf3e7 0%, #dcead7 52%, #9dc79e 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.5);
+      transform: translateZ(24px);
+    }
+
+    .premium-member-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: none;
+      transform: scale(1.005);
+      transition: transform .85s var(--ease-premium), filter .85s var(--ease-premium);
+    }
+
+    .premium-member-card:hover .premium-member-photo img {
+      filter: none;
+      transform: scale(1.1);
+    }
+
+    .premium-member-number {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 4;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      background: rgba(7, 28, 21, .88);
+      color: var(--lime);
+      border: 1px solid rgba(184,255,95,.22);
+      box-shadow: 0 18px 40px rgba(0,0,0,.25);
+      font-size: .72rem;
+      font-weight: 1000;
+      letter-spacing: .14em;
+    }
+
+    .premium-member-hover {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      z-index: 5;
+      padding: 16px;
+      border-radius: 22px;
+      background: rgba(4, 18, 14, .78);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.13);
+      backdrop-filter: blur(18px);
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .55s var(--ease-premium), transform .55s var(--ease-premium);
+    }
+
+    .premium-member-card:hover .premium-member-hover {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .premium-member-hover p {
+      margin: 0 0 12px;
+      color: rgba(255,255,255,.82);
+      font-size: .88rem;
+      line-height: 1.55;
+    }
+
+    .premium-member-socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .premium-member-socials a,
+    .premium-member-socials span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 34px;
+      padding: 0 11px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.1);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.13);
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: transform .4s var(--ease-premium), background .4s var(--ease-premium), color .4s var(--ease-premium);
+    }
+
+    .premium-member-socials a:hover {
+      transform: translateY(-3px);
+      background: var(--lime);
+      color: #071c15;
+    }
+
+    .premium-member-body {
+      position: relative;
+      z-index: 4;
+      padding: 22px 20px 24px;
+    }
+
+    .premium-member-role {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: var(--moss);
+      font-size: .72rem;
+      font-weight: 950;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .premium-member-role::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--lime);
+      box-shadow: 0 0 20px rgba(184,255,95,.6);
+    }
+
+    .premium-member-body h3 {
+      margin: 0 0 10px;
+      color: #fff;
+      font-size: clamp(1.45rem, 1.85vw, 2rem);
+      line-height: 1;
+      letter-spacing: -.055em;
+    }
+
+    .premium-member-title {
+      display: block;
+      margin-bottom: 15px;
+      color: rgba(255,255,255,.56);
+      font-size: .86rem;
+      font-weight: 800;
+    }
+
+    .premium-member-bio {
+      color: rgba(255,255,255,.69);
+      font-size: .92rem;
+      line-height: 1.68;
+      margin: 0 0 18px;
+      display: -webkit-box;
+      -webkit-line-clamp: 7;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .premium-member-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .premium-member-tags span {
+      border-radius: 999px;
+      padding: 8px 10px;
+      background: rgba(184,255,95,.09);
+      border: 1px solid rgba(184,255,95,.14);
+      color: rgba(255,255,255,.74);
+      font-size: .66rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+    }
+
+    .premium-member-placeholder .premium-member-photo {
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, rgba(255,255,255,.11), rgba(255,255,255,.035));
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .premium-placeholder-mark {
+      width: 148px;
+      height: 148px;
+      display: grid;
+      place-items: center;
+      border-radius: 42px;
+      background: linear-gradient(145deg, rgba(184,255,95,.22), rgba(255,255,255,.08));
+      border: 1px solid rgba(184,255,95,.22);
+      color: var(--lime);
+      font-size: 2.5rem;
+      font-weight: 1000;
+      letter-spacing: -.04em;
+      box-shadow: 0 30px 70px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.16);
+    }
+
+    .premium-team-ribbon {
+      margin-top: clamp(1.6rem, 4vw, 3rem);
+      overflow: hidden;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.055);
+      backdrop-filter: blur(16px);
+    }
+
+    .premium-team-ribbon-track {
+      display: flex;
+      gap: 30px;
+      width: max-content;
+      padding: 13px 0;
+      animation: premiumTeamMarquee 28s linear infinite;
+    }
+
+    .premium-team-ribbon span {
+      color: rgba(255,255,255,.66);
+      font-size: .76rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+    }
+
+    .premium-team-ribbon strong {
+      color: var(--lime);
+    }
+
+    @keyframes premiumTeamOrb {
+      from { transform: translate3d(0,0,0) scale(1); }
+      to { transform: translate3d(-18px, 24px, 0) scale(1.06); }
+    }
+
+    @keyframes premiumTeamMarquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @media (min-width: 1220px) {
+      .premium-member-card:nth-child(1) { transform-origin: right center; }
+      .premium-member-card:nth-child(2) { margin-top: 54px; }
+      .premium-member-card:nth-child(3) { margin-top: 18px; }
+      .premium-member-card:nth-child(4) { margin-top: 76px; }
+      .premium-member-card:nth-child(2):hover,
+      .premium-member-card:nth-child(3):hover,
+      .premium-member-card:nth-child(4):hover { transform: translateY(-10px) scale(1.02); }
+    }
+
+    @media (max-width: 1219px) {
+      .premium-team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .premium-member-card { min-height: 610px; }
+    }
+
+    @media (max-width: 860px) {
+      .premium-team-header { grid-template-columns: 1fr; }
+      .premium-team-stat { min-height: auto; }
+    }
+
+    @media (max-width: 640px) {
+      .premium-team-grid { grid-template-columns: 1fr; }
+      .premium-member-card { min-height: auto; }
+      .premium-member-photo { height: 330px; }
+      .premium-member-bio { -webkit-line-clamp: 8; }
+    }
+  </style>
+
 </head>
 <body>
   <div class="cursor-glow" aria-hidden="true"></div>
@@ -19,7 +454,7 @@
     </a>
     <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
     <nav class="main-nav" aria-label="Main navigation">
-      <a href="#about">Studio</a>
+      <a href="#about">Studio</a>      <a href="#team">Team</a>
       <a href="#services">Services</a>
       <a href="#portfolio">Portfolio</a>
       <a href="#partners">Partners</a>
@@ -79,6 +514,128 @@
         <article class="discipline reveal"><span>04</span><h3>Planning Team</h3><p>Urban designers, physical planners and land surveyors coordinating property space management, compliance and neighborhood context.</p></article>
         <article class="discipline reveal"><span>05</span><h3>Construction Managers</h3><p>Execution leaders managing site activity, material schedules, civil standards, labour safety and strict deadline controls.</p></article>
         <article class="discipline reveal accent"><span>06</span><h3>Integrated Brain Trust</h3><p>One coordinated team that navigates planning codes, load calculations, site parameters and high-end delivery requirements.</p></article>
+      </div>
+    </section>
+
+    <section class="section section-dark premium-team" id="team" aria-labelledby="team-title">
+      <div class="premium-team-gridline" aria-hidden="true"></div>
+      <div class="premium-team-shell">
+        <div class="section-kicker" data-team-animate>Leadership Team</div>
+        <div class="premium-team-header">
+          <div data-team-animate>
+            <p class="eyebrow">Architecture · Engineering · Project Delivery</p>
+            <h2 id="team-title">A leadership team built for design precision and engineering confidence.</h2>
+            <p class="lead">Meet the professionals behind SIEN Group’s integrated architecture, structural engineering, planning, construction and project management delivery model.</p>
+          </div>
+          <aside class="premium-team-stat" data-team-animate aria-label="SIEN featured team profiles">
+            <span>Featured team profiles</span>
+            <strong>04</strong>
+            <p>Two profiles are complete, with two refined placeholders ready for manual update when the remaining details are available.</p>
+          </aside>
+        </div>
+
+        <div class="premium-team-grid" aria-label="SIEN Group team members">
+          <article class="premium-member-card" data-team-card data-team-animate>
+            <div class="premium-member-photo">
+              <img src="assets/team/joash-obare.png" alt="Arch. Joash Obare, Principal Architect for SIEN Group" loading="lazy" />
+              <span class="premium-member-number">01</span>
+              <div class="premium-member-hover">
+                <p>Architecture, project planning, administration and contract management for full-cycle delivery.</p>
+                <div class="premium-member-socials">
+                  <a href="#contact">Contact</a>
+                  <span>BORAQS</span>
+                  <span>AAK</span>
+                </div>
+              </div>
+            </div>
+            <div class="premium-member-body">
+              <span class="premium-member-role">Principal Architect</span>
+              <h3>Arch. Joash Obare</h3>
+              <span class="premium-member-title">BORAQS A1589 · AAK MAAK 3696</span>
+              <p class="premium-member-bio">Arch. Joash Obare is the Principal Architect for SIEN Group. A registered Architect with Boraqs (A1589), and a member of AAK (MAAK 3696), Arch. Obare brings over 13 years of experience from Symbion International Architect to private practice and Kisii County Government. His training in Project Planning (Oracle), project management, administration, and contract management ensures high level design output and timely delivery from inception to construction, within cost and schedule.</p>
+              <div class="premium-member-tags">
+                <span>13+ years</span><span>Oracle planning</span><span>Contract management</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="premium-member-card" data-team-card data-team-animate>
+            <div class="premium-member-photo">
+              <img src="assets/team/wycliff-mitunda.png" alt="Eng. Wycliff Mitunda, Principal Structural Engineer at SIEN Group" loading="lazy" />
+              <span class="premium-member-number">02</span>
+              <div class="premium-member-hover">
+                <p>Structural engineering leadership, FIDIC contract knowledge and project planning discipline.</p>
+                <div class="premium-member-socials">
+                  <a href="#contact">Contact</a>
+                  <span>EBK</span>
+                  <span>IEK</span>
+                </div>
+              </div>
+            </div>
+            <div class="premium-member-body">
+              <span class="premium-member-role">Principal Structural Engineer</span>
+              <h3>Eng. Wycliff Mitunda</h3>
+              <span class="premium-member-title">EBK Registered · IEK Member</span>
+              <p class="premium-member-bio">Eng. Wycliff Mitunda is the Principal Structural Engineer at SIEN Group. He is a registered engineer with the Engineering Board of Kenya (EBK) and a member of the Institution of Engineers of Kenya (IEK). He brings extensive professional experience and technical expertise, with training in FIDIC contracts, project management and project planning. His leadership, technical competence and collaborative approach contribute significantly to SIEN Group’s success and growth.</p>
+              <div class="premium-member-tags">
+                <span>Structural design</span><span>FIDIC</span><span>Project management</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="premium-member-card premium-member-placeholder" data-team-card data-team-animate>
+            <div class="premium-member-photo">
+              <img src="assets/team/16672787-cde1-458c-be5c-b0d2678d499b.png" loading="lazy" />
+              <div class="premium-placeholder-mark">03</div>
+              <span class="premium-member-number">03</span>
+              <div class="premium-member-hover">
+                <p>Oteke brings a rich, vibrant multidisciplinary experience in Urban Design, Urban Planning, Research, Data science, and analytics, ensuring excellence in project life from ideas to reality.</p>
+                <div class="premium-member-socials">
+                  <span>Update</span><span>Profile</span>
+                </div>
+              </div>
+            </div>
+            <div class="premium-member-body">
+              <span class="premium-member-role">Urban Designer & Planner</span>
+              <h3>Oteke Sylvan</h3>
+              <span class="premium-member-title">Urban Designer · SIEN Group</span>
+              <p class="premium-member-bio">Oteke Sylvan is the Urban Designer & Planner for SIEN group. Oteke brings a rich, vibrant multidisciplinary experience in Urban Design, Urban Planning, Research, Data science, and analytics, ensuring excellence in project life from ideas to reality. Oteke's collaborative teamwork spirit ensures seamless delivery through a mastery of forecasting, complex project documentation, risk analysis, and prevention.</p>
+              <div class="premium-member-tags">
+                <span>Urban Planning</span><span>Research</span><span>Data Science and Analytics</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="premium-member-card premium-member-placeholder" data-team-card data-team-animate>
+            <div class="premium-member-photo">
+              <img src="assets/team/4bf468a8-18ab-46d3-b142-8fc24f28ec57.png" loading="lazy" />
+              <div class="premium-placeholder-mark">04</div>
+              <span class="premium-member-number">04</span>
+              <div class="premium-member-hover">
+                <p> I design and oversee the implementation of critical infrastructure, including HVAC, fire suppression, and intricate hydraulic systems for high-density residential and commercial developments.</p>
+                <div class="premium-member-socials">
+                  <span>Contact</span><span>EBK</span>
+                </div>
+              </div>
+            </div>
+            <div class="premium-member-body">
+              <span class="premium-member-role">Mechanical engineer and MEP specialist</span>
+              <h3>Oteke Sylvan</h3>
+              <span class="premium-member-title">Mechanical Engineer · SIEN Group</span>
+              <p class="premium-member-bio">I am a consulting mechanical engineer and MEP specialist with 13+ years of experience in site supervision, digital construction, and building services design. Utilizing advanced BIM and drafting tools like Revit and AutoCAD, I design and oversee the implementation of critical infrastructure, including HVAC, fire suppression, and intricate hydraulic systems for high-density residential and commercial developments. Additionally, I consult on renewable energy engineering, specializing in the sizing and load scheduling of hybrid solar PV and thermal water heating systems to drive energy-efficient construction.</p>
+              <div class="premium-member-tags">
+                <span>MEP Specialist</span><span>13+ years</span><span>Mechanical Engineer</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="premium-team-ribbon" data-team-animate aria-hidden="true">
+          <div class="premium-team-ribbon-track">
+            <span><strong>Architecture Leadership</strong></span><span>Structural Engineering</span><span>Project Planning</span><span>Contract Management</span><span>Construction Delivery</span><span>Cost Discipline</span>
+            <span><strong>Architecture Leadership</strong></span><span>Structural Engineering</span><span>Project Planning</span><span>Contract Management</span><span>Construction Delivery</span><span>Cost Discipline</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -247,6 +804,8 @@
   <script src="data.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase-config.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
